@@ -47,9 +47,13 @@ APP.Data = (function() {
 })();
 
 $(document).ready(function() {
+	// Register click event 
 	$('#click-me').click(function(e) {
+		// Prevent default action
 		e.preventDefault();
 		var food = $('#search-box').val();
+		
+		// Make ajax request
 		APP.Data.getFood(food, function(response) {
 			//console.log('response' + response);
 		});
