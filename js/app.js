@@ -9,13 +9,12 @@ APP.Data = (function() {
 	var APP_KEY = 'e0e5018302c5aaee5b558d11b355d4db';
 
 	var NUTRI_API_BASE = 'https://api.nutritionix.com/v1_1/search/';
-  	var NUTRI_API_TRAIL = "?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=" + APP_ID + "&appKey=" + APP_KEY +'"';
+  	var NUTRI_API_TRAIL = "?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=" + APP_ID + "&appKey=" + APP_KEY;
 
   	// This function retrieves food item
 	function getFood(food, callback) {
 		// Construct food search API URL
 		var foodSearchURL = NUTRI_API_BASE+ food + NUTRI_API_TRAIL;
-	
 		// Make asynchronous request
 		request(foodSearchURL, function(response) {
 			callback(response);
@@ -50,8 +49,16 @@ $(document).ready(function() {
 	$('#click-me').click(function(e) {
 		e.preventDefault();
 		var food = $('#search-box').val();
+		console.log('hello');
+
+		// Make async request
 		APP.Data.getFood(food, function(response) {
-			//console.log('response' + response);
+			$('.food-items').html('');
+
+			// Loop through the response and add it to the DOM
+			response.hits.forEach(function(item) {
+				$('.food-items').append('<li>' + item.fields.brand_name + '-' + item.fields.item_name +'</li>');
+			})
 		});
 	});
 });
