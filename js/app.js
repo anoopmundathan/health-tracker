@@ -46,12 +46,13 @@ APP.Data = (function() {
 })();
 
 $(document).ready(function() {
+	// Register click event 
 	$('#click-me').click(function(e) {
+		// Prevent default action
 		e.preventDefault();
 		var food = $('#search-box').val();
-		console.log('hello');
-
-		// Make async request
+		
+		// Make ajax request
 		APP.Data.getFood(food, function(response) {
 			$('.food-items').html('');
 
