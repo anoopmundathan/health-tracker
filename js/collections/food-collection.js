@@ -23,6 +23,17 @@ APP.FoodCollection = Backbone.Model.extend({
 	},
 
 	parse: function(response) {
-		console.log(response);
+		var searchItems = [],
+		    length = response.hits.length;
+
+		for (var i = 0; i < length; i++) {
+			var foodItem = new APP.Food({
+				brand_name: response.hits[i].fields.brand_name,
+				item_name: response.hits[i].fields.item_name,
+				calories: response.hits[i].fields.nf_calories
+			});
+			searchItems.push(foodItem);
+		}
+		return searchItems;
 	}
 });
