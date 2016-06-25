@@ -10,11 +10,22 @@ APP.SearchView = Backbone.View.extend({
 	},
 	
 	initialize: function() {
-		this.searchField = $('search-box');
+		this.searchField = $('#search-box');
 		this.collection = new APP.FoodCollection();
 	},
 
 	searchFood: function(event) {
+
+		// Update input value of the collection
+		this.collection.setInputVal(this.searchField.val());
+		this.collection.fetch({
+			success: function() {
+				console.log('success');
+			},
+			error: function() {
+				console.log('error');
+			}
+		});
 
 	}
 });
