@@ -46,6 +46,9 @@ APP.Data = (function() {
 })();
 
 $(document).ready(function() {
+
+	new APP.SearchView();
+	/*
 	// Register click event 
 	$('#click-me').click(function(e) {
 		// Prevent default action
@@ -61,6 +64,7 @@ $(document).ready(function() {
 				$('.food-items').append('<li>' + item.fields.brand_name + '-' + item.fields.item_name +'</li>');
 			})
 		});
-	});
+	});*/
+	
 });
 
