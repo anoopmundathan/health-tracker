@@ -22,6 +22,11 @@
     <div class="row">
       <div class="col-md-6">
           <ul class="food-list">
+            <script type="text/template" id="search-result-template">
+              <span><%= brand_name %></span>
+              <span><%= item_name %></span>
+              <span><%= calories %></span>
+            </script>
           </ul>
       </div>
       <div class="col-md-6">
@@ -36,6 +41,7 @@
   <script src="js/models/food-model.js"></script>
   <script src="js/collections/food-collection.js"></script>
   <script src="js/views/search-view.js"></script>
+  <script src="js/views/search-result-view.js"></script> 
 	<script src="js/app.js"></script>
 </body>
 </html>

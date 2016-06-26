@@ -12,33 +12,25 @@ APP.SearchView = Backbone.View.extend({
 	initialize: function() {
 		this.searchField = $('#search-box');
 		this.collection = new APP.FoodCollection();
-		//this.listenTo(this.collection, 'sync', this.render);
+		this.list = $('.food-list');
 	},
 
 	searchFood: function(event) {
 
+		var self = this;
 		// Update input value of the collection
 		this.collection.setInputVal(this.searchField.val());
 		this.collection.getJSON(function(response) {
-		
 			response.forEach(function(item) {
-				$('.food-list').append('<li>' + item.attributes.brand_name + '</li>');
-				console.log(item.attributes.brand_name);
+				self.render(item);
 			});
 		});
 	},
 
-	render: function() {
-		this.collection()
-		console.log(this);
-		this.collection.each(function(item){
-
-			console.log(item);
-        	/*var foodview = new app.SearchSingleView({model: item});
-        	this.$list.append(foodview.render().el);*/
-
-      	}.bind(this));
-
+	render: function(item) {
+		this.list.html('');
+		var searchResultView = new APP.SearchResultView({model: item});
+		this.list.append(searchResultView.render().el);
 	}
 
 });
