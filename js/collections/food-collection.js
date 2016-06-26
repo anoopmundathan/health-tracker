@@ -35,5 +35,15 @@ APP.FoodCollection = Backbone.Model.extend({
 			searchItems.push(foodItem);
 		}
 		return searchItems;
-	}
+	},
+
+	getJSON: function(cb) {
+		var self = this;
+		$.ajax({
+			url: this.url(),
+			dataType: 'json'
+		}).done(function(response){
+			cb(self.parse(response));
+		});
+	},
 });
