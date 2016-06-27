@@ -11,8 +11,10 @@ APP.SearchView = Backbone.View.extend({
 	
 	initialize: function() {
 		this.searchField = $('#search-box');
-		this.collection = new APP.FoodCollection();
 		this.list = $('.food-list');
+
+		this.collection = new APP.FoodCollection();
+		this.listenTo(this.collection, 'sync', this.render);
 	},
 
 	searchFood: function(event) {
@@ -20,17 +22,24 @@ APP.SearchView = Backbone.View.extend({
 		var self = this;
 		// Update input value of the collection
 		this.collection.setInputVal(this.searchField.val());
-		this.collection.getJSON(function(response) {
-			response.forEach(function(item) {
-				self.render(item);
-			});
+		this.collection.fetch({
+			error: function(){
+          		self.$list.html('');
+          		self.$list.append('<h2>Oops, something went wrong!</h2><p>Please try later or reload the page.</p>');
+        	}
 		});
 	},
 
-	render: function(item) {
+	render: function() {
+		var self = this;
+
 		this.list.html('');
-		var searchResultView = new APP.SearchResultView({model: item});
-		this.list.append(searchResultView.render().el);
+
+		this.collection.each(function(item) {
+			var searchResultView = new APP.SearchResultView({model: item});
+			self.list.append(searchResultView.render().el);
+		}.bind(this));
 	}
 
 });
+
