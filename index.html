@@ -21,16 +21,23 @@
    	</div>	
     <div class="row">
       <div class="col-md-6">
-          <ul class="food-list">
-            <script type="text/template" id="search-result-template">
-              <span><%= brand_name %></span>
-              <span><%= item_name %></span>
-              <span><%= calories %></span>
-            </script>
+        <ul class="food-list">
+          <script type="text/template" id="search-result-template">
+            <span><%= brand_name %></span>
+            <span><%= item_name %></span>
+            <span><%= calories %></span>
+          </script>
           </ul>
       </div>
       <div class="col-md-6">
-        <h1>second column</h1>
+        <ul class="selected-items">
+          <script type="text/template" id="selected-item-template">
+            <span><%= brand %></span>
+            <span><%= item %></span>
+            <span><%= cal %></span>
+          </script>
+        </ul>
+        <b>Total calories: </b><span id="total-calories"></span>
       </div>
     </div>
     
@@ -39,9 +46,12 @@
 	<script src="bower_components/underscore/underscore-min.js"></script>
   <script src="bower_components/backbone/backbone-min.js"></script>
   <script src="js/models/food-model.js"></script>
+  <script src="js/models/selected-food-model.js"></script>
   <script src="js/collections/food-collection.js"></script>
+  <script src="js/collections/selected-food-collection.js"></script>
   <script src="js/views/search-view.js"></script>
   <script src="js/views/search-result-view.js"></script> 
+  <script src="js/views/selected-item-view.js"></script> 
 	<script src="js/app.js"></script>
 </body>
 </html>
