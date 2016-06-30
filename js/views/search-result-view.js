@@ -2,6 +2,7 @@
 
 var APP = APP || {};
 
+// This view represents selected item
 APP.SearchResultView = Backbone.View.extend({
 
 	tagName: 'li',
